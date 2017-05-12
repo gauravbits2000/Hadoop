@@ -1,0 +1,50 @@
+Spark related Doc
+
+steps:
+==========
+1)	untar zip
+sudo chown -R ec2-user:ec2-user /usr/share/spark-2.0.1-bin-hadoop2.7
+sudo chmod -R 777 /usr/share/spark-2.0.1-bin-hadoop2.7
+2)  go to conf folder
+3) make a copy of env/slaved/default setting file
+4) update env with master ip, hadoop conf folder location.
+5) update slaves list in slaves
+6) update .bashrc file with spark_home value
+7) start all using start-all present in sbin folder.
+8) access namenode 8080 port for web-ui
+9) go to bin folder
+
+never run any command using sudo
+
+10) soft link for hive file to access hive tables :
+ln -s /usr/share/apache-hive-2.1.0-bin/conf/hive-site.xml /usr/share/spark-2.0.1-bin-hadoop2.7/conf/hive-site.xml
+11) jdbs driver
+ cp /usr/share/apache-hive-2.1.0-bin/lib/mysql-connector-java-5.1.10.jar /usr/share/spark-2.0.1-bin-hadoop2.7/jars/
+
+ spark UI link http://10.5.139.130:8080
+ 
+ start job history server
+ /usr/share/hadoop-2.7.2/sbin/mr-jobhistory-daemon.sh --config /usr/share/hadoop-2.7.2/etc/hadoop/ start historyserver
+12)
+start spark shell using 
+./spark-shell --jars /usr/share/apache-hive-2.1.0-bin/lib/*.jar --executor-memory 4g --executor-cores 1
+ 
+import org.apache.spark.sql.SparkSession;
+val spark = SparkSession.builder().appName("Spark SQL basic example").config("spark.some.config.option", "test").getOrCreate();
+spark.sql("SELECT * FROM core_ref_data_audit.inst_interest_definition_par where inst_id = 762526").show(1000,false);
+sqlDF.show();
+
+val sqlDF = spark.sql("SELECT * FROM core_ref_data_audit.inst_interest_definition_par");
+sqlDF.show();
+
+sqlDF.groupBy("coupon_frequency").count().show();
+
+spark.sql("SELECT coupon_frequency,count(1) FROM core_ref_data_audit.inst_interest_definition_par group by coupon_frequency").show();
+
+documentation: http://spark.apache.org/docs/latest/sql-programming-guide.html;
+
+on local: http://letstalkspark.blogspot.in/2016/02/getting-started-with-spark-on-window-64.html
+
+
+
+

@@ -1,0 +1,41 @@
+1. Downloaded the hadoop gzip
+2. Copied the gzip to DEV05 machine, and extracted it. 
+	tar xvf file.tar
+3. Followed below link for intallation
+	https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SingleCluster.html#Installing_Software
+	
+4. Added following entry in .bashrc  	
+	export HADOOP_HOME=/home/parag.garg/temp/hadoop-2.7.3
+	export PATH=$PATH:$HADOOP_HOME/bin
+	
+5. Following changes made in hdfs-site.xml for datanode and name node directories
+
+	<property>
+         <name>dfs.permissions</name>
+         <value>false</value>
+    </property>
+	
+	<!-- Data node location -->
+	<property>
+      <name>dfs.data.dir</name>
+      <value>/home/parag.garg/var/hadoop/dfs/name/data</value>
+      <final>true</final>
+    </property>
+
+   <!-- Name node location -->
+   <property>
+      <name>dfs.name.dir</name>
+      <value>/home/parag.garg/var/hadoop/dfs/name</value>
+      <final>true</final>
+   </property> 
+   
+ 6. Create SSH connection between DEV05 and DEV06  
+	for reference : http://www.tutorialspoint.com/hadoop/hadoop_multi_node_cluster.htm
+	
+	
+	
+Important links :
+http://www.tutorialspoint.com/hadoop/hadoop_multi_node_cluster.htm
+https://letsdobigdata.wordpress.com/2014/01/13/setting-up-hadoop-1-2-1-multi-node-cluster-on-amazon-ec2-part-2/
+https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SingleCluster.html#Installing_Software
+http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html
