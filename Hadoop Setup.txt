@@ -1,7 +1,9 @@
 1. Downloaded the hadoop gzip
+
 2. Copied the gzip to DEV05 machine, and extracted it. 
 	tar xvf file.tar
-3. Followed below link for intallation
+
+	3. Followed below link for intallation
 	https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/SingleCluster.html#Installing_Software
 	
 4. Added following entry in .bashrc  	
